@@ -1,0 +1,28 @@
+this file created to recreated data incase of any change
+
+//for transportation
+[ 
+  '{{repeat(50)}}',
+  {
+    id: '{{index()}}',
+    customerId: '{{integer(1234, 9999)}}',
+    name: '{{firstName()}} {{surname()}}',
+    address: '{{integer(100, 999)}} {{street()}}, {{city()}}, {{state()}}, {{integer(100, 10000)}}',
+    fromLatitude: '{{floating(-90.000001, 90)}}',
+    fromLongitude: '{{floating(-180.000001, 180)}}',
+    toLatitude: '{{floating(-90.000001, 90)}}',
+    toLongitude: '{{floating(-180.000001, 180)}}',
+    isArrived: '{{bool()}}'
+    }
+]
+
+//for user
+[
+  '{{repeat(7)}}',
+  {
+    id: '{{index()}}',
+    isActive: '{{bool()}}',
+    name: '{{firstName()}} {{surname()}}',
+    password: '{{integer(12345, 99999)}}'
+  }
+]
