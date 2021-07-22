@@ -1,0 +1,3 @@
+export const LOAD_MOVIES = 'app/LOAD_MOVIES';
+export const LOAD_MOVIES_SUCCESS = 'app/LOAD_MOVIES_SUCCESS';
+export const LOAD_MOVIES_ERROR = 'app/LOAD_MOVIES_ERROR';

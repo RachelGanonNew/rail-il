@@ -2,8 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const router = express.Router();
 const BASE_DIR = __dirname.replace('middlewares', '');
-const jsonTransportationPath = `${BASE_DIR}\\data\\transportationData.json`;
-const jsonUserPath = `${BASE_DIR}\\data\\userData.json`;
+const jsonMoviesPath = `${BASE_DIR}\\data\\moviesData.json`;
+
 const bodyParser = require('body-parser');
 
 router.use(
@@ -18,39 +18,30 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/transportation/list', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
+router.get('/movies/list', (req, res) => {
+  fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     res.end(data);
   });
 });
 
-router.get('/getNewTransportationId', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
+router.get('/getNewMovieId', (req, res) => {
+  fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const newId = list.length;
     res.end(JSON.stringify(newId));
   });
 });
 
-router.post('/getExistUser', (req, res) => {
-  fs.readFile(jsonUserPath, 'utf8', (err, data) => {
-    const list = JSON.parse(data);
-    const {pass} = req.body;
-    const user = _getUserByPass(list, pass);
-    if(user) res.end(JSON.stringify(user));
-    else res.end(JSON.stringify(false));
-  });
-    
-});
+
 
 router.post('/add', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
+  fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const item = req.body;
     const newList = _addItem(list, item);
     const jsonData = JSON.stringify(newList);
 
-    fs.writeFile(jsonTransportationPath, jsonData, writeFileErr => {
+    fs.writeFile(jsonMoviesPath, jsonData, writeFileErr => {
       if (!writeFileErr) {
         res.end(jsonData);
       } else {
@@ -62,7 +53,7 @@ router.post('/add', (req, res) => {
 
 
 router.get('/get/:id', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
+  fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const { id } = req.params;
     const item = _getItem(list, id);
@@ -71,13 +62,13 @@ router.get('/get/:id', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
+  fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const item = req.body;
     const newList = _updateItem(list, item);
     const jsonData = JSON.stringify(newList);
 
-    fs.writeFile(jsonTransportationPath, jsonData, writeFileErr => {
+    fs.writeFile(jsonMoviesPath, jsonData, writeFileErr => {
       if (!writeFileErr) {
         res.end(jsonData);
       } else {
@@ -87,22 +78,6 @@ router.post('/update', (req, res) => {
   });
 });
 
-router.post('/delete/:id', (req, res) => {
-  fs.readFile(jsonTransportationPath, 'utf8', (err, data) => {
-    const list = JSON.parse(data);
-    const { id } = req.params;
-    const newList = _deleteItem(list, id);
-    const jsonData = JSON.stringify(newList);
-
-    fs.writeFile(jsonTransportationPath, jsonData, writeFileErr => {
-      if (!writeFileErr) {
-        res.end(jsonData);
-      } else {
-        res.end(data);
-      }
-    });
-  });
-});
 
 // Private functions
 const _getItem = (list, id) => {
@@ -110,10 +85,6 @@ const _getItem = (list, id) => {
   return currentItem;
 };
 
-const _getUserByPass = (list, pass) => {
-  const currentItem = list.find(user => user.password.toString() === pass.toString());
-  return currentItem;
-};
 
 const _updateItem = (list, updatedItem) => {
   const newList = [...list];
@@ -124,14 +95,7 @@ const _updateItem = (list, updatedItem) => {
   return newList;
 };
 
-const _deleteItem = (list, id) => {
-  const newList = [...list];
-  const currentItemIndex = list.findIndex(
-    item => item.id.toString() === id.toString(),
-  );
-  newList.splice(currentItemIndex, 1);
-  return newList;
-};
+
 
 const _addItem = (list, addedItem) => {
   let lastId = 0;

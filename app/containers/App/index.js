@@ -1,44 +1,34 @@
 import React  from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import { Switch, Route } from 'react-router-dom';
-import TrasportationListPage from 'containers/TrasportationListPage/Loadable';
-import AddTrasportaionPage from 'containers/AddTrasportaionPage/Loadable';
+import { Router, Switch, Route } from "react-router-dom";
+import MoviesList from 'containers/MoviesListPage/Loadable';
+
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import LoginPage from 'containers/LoginPage/Loadable';
+import { history } from 'utils/history';
+import AddMoviePage  from 'containers/AddMoviePage/Loadable';
+import EditMoviePage  from 'containers/EditMoviePage/Loadable';
+
 import 'style.scss';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 
 export function App() {
   return (
-    <div style={{ marginLeft :'20px'}}>
+    <Router history={history}>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route
-          exact
-          path="/transportaionList"
-          component={TrasportationListPage}
-        />
-        <Route exact path="/addTrasportaion" component={AddTrasportaionPage} />
+        <Route exact path={["/", "/moviesList"]} component={MoviesList} />
+        <Route  path="/create" component={AddMoviePage} />
+        <Route  path="/edit/movieId" component={EditMoviePage} />
+
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </Router>
   );
 }
 
 App.propTypes = {
 };
 
-const mapStateToProps = createSelector({
-});
-
-function mapDispatchToProps() {
-  return {
-  };
-}
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
 )(App);

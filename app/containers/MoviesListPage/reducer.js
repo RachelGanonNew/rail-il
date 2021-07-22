@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { LOAD_TRANSPORTATIONS, LOAD_TRANSPORTATIONS_SUCCESS, LOAD_TRANSPORTATIONS_ERROR } from './constants';
+import { LOAD_MOVIES, LOAD_MOVIES_SUCCESS, LOAD_MOVIES_ERROR } from './constants';
 
 export const initialState = {
   list: false,
@@ -8,23 +8,23 @@ export const initialState = {
   error: false,
 };
 
-const transportationsListReducer = (state = initialState, action) => 
+const MoviesListReducer = (state = initialState, action) => 
   produce(state, ( draft ) => {
     switch (action.type) {
 
-      case LOAD_TRANSPORTATIONS:
+      case LOAD_MOVIES:
         draft.loading = true;
         draft.error = true;
         draft.list = false;
         break;
 
-      case LOAD_TRANSPORTATIONS_SUCCESS:
+      case LOAD_MOVIES_SUCCESS:
         draft.loading = false;
         draft.error = false;
-        draft.list = action.transportations;
+        draft.list = action.list;
         break;
 
-      case LOAD_TRANSPORTATIONS_ERROR:
+      case LOAD_MOVIES_ERROR:
         draft.loading = false;
         draft.error = true;
         break;
@@ -34,4 +34,4 @@ const transportationsListReducer = (state = initialState, action) =>
     }
   });
 
-export default transportationsListReducer;
+export default MoviesListReducer;

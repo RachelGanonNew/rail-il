@@ -12,8 +12,7 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-import history from 'utils/history';
+// import { ConnectedRouter } from 'connected-react-router';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -21,6 +20,7 @@ import { App } from 'containers/App';
 
 // Import Language Provider
 import { LanguageProvider } from 'containers/LanguageProvider';
+import { history } from './utils/history';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -41,9 +41,7 @@ const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <App />
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE,
