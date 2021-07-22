@@ -9,54 +9,57 @@ import { connect } from 'react-redux';
 import reducer from './reducer';
 import saga from './saga';
 import { editCurrentMovie, getCurrentMovie } from './actions';
-import { makeSelectCurrentMovieError, makeSelectCurrentMovie} from './selectors';
+import { makeSelectCurrentMovieError, makeSelectCurrentMovie } from './selectors';
 import AddMovieForm from '../../components/AddMovieForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import messages from './messages';
 
-export function EditMoviePage(props,{ onLoadCurrentMovie, submitEditCurrentMovie, error, currentMovie}) {
+export function EditMoviePage(props) {
+
   useInjectReducer({ key: 'editMoviePage', reducer });
   useInjectSaga({ key: 'editMoviePage', saga });
-  const {id} = props.match.params;
-  console.log("EditMoviePage",id);
+
+  const { id } = props.match.params;
 
   useEffect(() => {
-    onLoadCurrentMovie(id);
+    if (props.currentMovie === undefined || props.currentMovie.id === 0)
+      props.onLoadCurrentMovie(id);
   });
 
   return (
     <>
-   
-      {error && <div className="error">
+      {props.error && <div className="error">
         <FormattedMessage {...messages.err} /></div>}
       <ErrorBoundary>
-        <AddMovieForm
-          currentMovie={currentMovie} parentCallback = {submitEditCurrentMovie}/>
+        {props.currentMovie.id !== 0 && <AddMovieForm
+          currentMovie={props.currentMovie} parentCallback={props.submitEditCurrentMovie} />}
       </ErrorBoundary>
     </>
   );
 }
+
 EditMoviePage.propTypes = {
-  onLoadCurrentMovie: PropTypes.func,
+  onLoadCurrentMovie: PropTypes.any,
   submitEditCurrentMovie: PropTypes.func,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   id: PropTypes.number,
-  currentMovie:PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  match:PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  currentMovie: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  match: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
-  
+
 
 const mapStateToProps = createStructuredSelector({
   error: makeSelectCurrentMovieError(),
-  currentMovie:  makeSelectCurrentMovie(),
+  currentMovie: makeSelectCurrentMovie(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadCurrentMovie: (id) =>dispatch(getCurrentMovie(id)),
+    onLoadCurrentMovie: (id) =>{dispatch(getCurrentMovie(id))},
     submitEditCurrentMovie: (newMovie) => dispatch(editCurrentMovie(newMovie)),
   };
 }
+
 
 const withConnect = connect(
   mapStateToProps,

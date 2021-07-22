@@ -7,28 +7,59 @@ import messages from './messages';
 import { CATEGORY, IMAGE, YEAR, NAME, DIRECTOR} from '../../Common/consts';
 
 export function AddMovieForm(props) {
-  
   const [newMovie,setNewMovie] = useState({
-    name: props.currentMovie?props.currentMovie.name:'',
-    year:props.currentMovie?props.currentMovie.year:'',
-    director: props.currentMovie?props.currentMovie.director:'',
-    image: props.currentMovie?props.currentMovie.image:'',
-    category: props.currentMovie?props.currentMovie.category:''
+    Director:props.currentMovie.Director,
+    Genre: props.currentMovie.Genre,
+    Plot: props.currentMovie.Plot,
+    Poster: props.currentMovie.Poster,
+    Title: props.currentMovie.Title,
+    Year: props.currentMovie.Year,
+
+    // name: props.currentMovie?props.currentMovie.name:'',
+    // year:props.currentMovie?props.currentMovie.year:'',
+    // director: props.currentMovie?props.currentMovie.director:'',
+    // image: props.currentMovie?props.currentMovie.image:'',
+    // category: props.currentMovie?props.currentMovie.category:''
   })
   
   const handleSubmit = () =>{
     props.parentCallback(newMovie);
   }
-  const onNameChange = (event) => setNewMovie({name:event.target.value,
-    year:newMovie.year,director:newMovie.director,image:newMovie.image,category:newMovie.category});
-  const onDirectorChange = (event) => setNewMovie({name:newMovie.name,year:newMovie.year,
-    director:event.target.value, image:newMovie.image, category:newMovie.category});
-  const onImgChange = (event) => setNewMovie({name:newMovie.name,year:newMovie.year,
-    director:newMovie.director, image:event.target.value, category:newMovie.category});
-  const onYearChange = (event) => setNewMovie({name:newMovie.name,year:event.target.value,
-    director:newMovie.director, image:newMovie.image, category:newMovie.category});
-  const onCategoryChange = (event) => setNewMovie({name:newMovie.name,year:newMovie.year,
-    director:newMovie.director, image:newMovie.image, category:event.target.value});
+  const onNameChange = (event) => setNewMovie({ Director:props.currentMovie.Director,
+    Genre: props.currentMovie.Genre,
+    Plot: props.currentMovie.Plot,
+    Poster: props.currentMovie.Poster,
+    Title: event.target.value,
+    Year: props.currentMovie.Year,
+  });
+  const onDirectorChange = (event) => setNewMovie({ Director:event.target.value,
+    Genre: props.currentMovie.Genre,
+    Plot: props.currentMovie.Plot,
+    Poster: props.currentMovie.Poster,
+    Title: props.currentMovie.Title,
+    Year: props.currentMovie.Year,
+  });
+  const onImgChange = (event) => setNewMovie({ Director:props.currentMovie.Director,
+    Genre: props.currentMovie.Genre,
+    Plot: props.currentMovie.Plot,
+    Poster: event.target.value,
+    Title: props.currentMovie.Title,
+    Year: props.currentMovie.Year,
+  });
+  const onYearChange = (event) => setNewMovie({ Director:props.currentMovie.Director,
+    Genre: props.currentMovie.Genre,
+    Plot: props.currentMovie.Plot,
+    Poster: props.currentMovie.Poster,
+    Title: props.currentMovie.Title,
+    Year: event.target.value
+  });
+  const onCategoryChange = (event) => setNewMovie({ Director:props.currentMovie.Director,
+    Genre: event.target.value,
+    Plot: props.currentMovie.Plot,
+    Poster: props.currentMovie.Poster,
+    Title: props.currentMovie.Title,
+    Year: props.currentMovie.Year,
+  });
 
   return (
 

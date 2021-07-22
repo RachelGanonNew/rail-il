@@ -6,13 +6,13 @@ const selectEditMoviePageDomain = state => state.editMoviePage || initialState;
 const makeSelecteditMoviePage = () =>
   createSelector(
     selectEditMoviePageDomain,
-    substate => substate,
+    editMoviePage => editMoviePage
   );
 
 const makeSelectCurrentMovieError = () =>
   createSelector(
     selectEditMoviePageDomain,
-    editMoviePage => editMoviePage.currentMovie.error,
+    editMoviePage => editMoviePage.error,
   );
 
 const makeSelectCurrentMovie = () =>
@@ -27,35 +27,41 @@ const makeSelectCurrentMovieId = () =>
     selectEditMoviePageDomain,
     editMoviePage => editMoviePage.currentMovie.id,
   );
-const makeSelectCurrentMovieName = () =>
+const makeSelectCurrentMoviePlot = () =>
   createSelector(
     selectEditMoviePageDomain,
-    editMoviePage => editMoviePage.currentMovie.name,
+    editMoviePage => editMoviePage.currentMovie.Plot,
+  );
+const makeSelectCurrentMovieTitle = () =>
+  createSelector(
+    selectEditMoviePageDomain,
+    editMoviePage => editMoviePage.currentMovie.Title,
   );
 const makeSelectCurrentMovieYear = () =>
   createSelector(
     selectEditMoviePageDomain,
-    editMoviePage => editMoviePage.currentMovie.year,
+    editMoviePage => editMoviePage.currentMovie.Year,
   );
 const makeSelectCurrentMovieCategory = () =>
   createSelector(
     selectEditMoviePageDomain,
-    editMoviePage => editMoviePage.currentMovie.category,
+    editMoviePage => editMoviePage.currentMovie.Genre,
   );
 const makeSelectCurrentMovieImage = () =>
   createSelector(
     selectEditMoviePageDomain,
-    editMoviePage => editMoviePage.currentMovie.image,
+    editMoviePage => editMoviePage.currentMovie.Poster,
   );
 export {
   makeSelecteditMoviePage,
   makeSelectCurrentMovieError,
   makeSelectCurrentMovie,
   makeSelectCurrentMovieId,
-  makeSelectCurrentMovieName,
+  makeSelectCurrentMovieTitle,
   makeSelectCurrentMovieYear,
   makeSelectCurrentMovieCategory,
-  makeSelectCurrentMovieImage
+  makeSelectCurrentMovieImage,
+  makeSelectCurrentMoviePlot
 
 };
 export { selectEditMoviePageDomain };

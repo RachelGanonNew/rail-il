@@ -14,7 +14,7 @@ export default function MovieCard({item}) {
   return (
         <>
             <Card onClick={clickCard}>
-              <Card.Img variant="top" src={item.Poster} />
+              <Card.Img variant="top" src={item.Poster} thumbnail="true" />
               <Card.Body>
                 <Card.Title>
                   {item.Title}

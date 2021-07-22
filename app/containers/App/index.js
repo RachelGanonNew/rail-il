@@ -7,11 +7,12 @@ import MoviesList from 'containers/MoviesListPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import AddMoviePage  from 'containers/AddMoviePage/Loadable';
 import EditMoviePage  from 'containers/EditMoviePage/Loadable';
+import MovieDetails from '../MovieDetails';
 
 import 'style.scss';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
-import MovieDetails from '../MovieDetails';
+
 
 export function App() {
   return (

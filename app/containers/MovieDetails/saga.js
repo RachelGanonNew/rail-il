@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 
-import { GET_CURRENT_MOVIE, EDIT_CURRENT_MOVIE } from './constants';
-import { getCurrentMovieSuccess, getCurrentMovieError, editCurrentMovieError, editCurrentMovieSuccess } from './actions';
+import { GET_CURRENT_MOVIE } from './constants';
+import { getCurrentMovieSuccess, getCurrentMovieError } from './actions';
 
 const baseUrl = "/api";
 
@@ -10,7 +10,6 @@ export function* getCurrentMovie(action){
   const requestURL = `${baseUrl}/getCurrentMovie/${action.id}`;
   try{
     const current = yield call(request, requestURL);
-
     yield put(getCurrentMovieSuccess(current));
   }
   catch(err){

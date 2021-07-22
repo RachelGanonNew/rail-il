@@ -1,54 +1,46 @@
 import produce from 'immer';
 import {
-  DEFAULT_ACTION, GET_CURRENT_MOVIE, GET_CURRENT_MOVIE_ERROR, GET_CURRENT_MOVIE_SUCCESS,
+  GET_CURRENT_MOVIE, GET_CURRENT_MOVIE_ERROR, GET_CURRENT_MOVIE_SUCCESS,
   EDIT_CURRENT_MOVIE, EDIT_CURRENT_MOVIE_ERROR, EDIT_CURRENT_MOVIE_SUCCESS
 } from './constants';
 export const initialState = {
   currentMovie: {
-    error: false,
+    Director: "",
+    Genre: "",
+    Plot: "",
+    Poster: "",
+    Rated: "",
+    Title: "",
+    Writer: "",
+    Year: "",
     id: 0,
-    name: '',
-    year: '',
-    director: '',
-    image: '',
-    category: ''
-
   },
-  
+  loading: false,
+  error:false
 };
 
-const addMoviesPageReducer = (state = initialState, action) =>
+const editCurrentMoviePageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
 
-      case DEFAULT_ACTION:
-        break;
-
       case GET_CURRENT_MOVIE:
       case EDIT_CURRENT_MOVIE:
-        draft.currentMovie.error = false;
-        
+        draft.loading = true;
+        draft.error = true;
         break;
 
       case GET_CURRENT_MOVIE_SUCCESS:
         draft.currentMovie = action.currentMovie;
-        draft.currentMovie.error = false;
+        draft.loading = false;
+        draft.error = false;
         break;
 
       case GET_CURRENT_MOVIE_ERROR:
       case EDIT_CURRENT_MOVIE_ERROR:
-        draft.currentMovie =  {
-          error: false,
-          id: 0,
-          name: '',
-          year: '',
-          director: '',
-          image: '',
-          category: ''
-        
-        }  
+        draft.loading = false;
+        draft.error = true;
         break;
-      case EDIT_CURRENT_MOVIE_SUCCESS:      
+      case EDIT_CURRENT_MOVIE_SUCCESS:
         draft.currentMovie = action.currentMovie;
         window.open("/moviesList", "_self");
         break
@@ -58,4 +50,4 @@ const addMoviesPageReducer = (state = initialState, action) =>
     }
   });
 
-export default addMoviesPageReducer;
+export default editCurrentMoviePageReducer;

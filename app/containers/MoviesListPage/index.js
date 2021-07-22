@@ -27,6 +27,7 @@ export function MoviesListPage({ moviesList, loading, error, onLoadMovies }) {
   useEffect(() => {
     if (!moviesList) onLoadMovies();
   }, []);
+  
   if (redirect)
     return <Redirect to={redirect} />
   return(

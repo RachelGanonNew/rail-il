@@ -1,24 +1,24 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectMovie = state => state.moviesDetailsPage || initialState;
+const selectMovie = state => state.detailsMoviePage || initialState;
 
 const makeSelectMovieDetails = () =>
   createSelector(
     selectMovie,
-    moviesDetailsPage => moviesDetailsPage.currentMovie ,
+    detailsMoviePage => detailsMoviePage.currentMovie 
   );
 
 const makeSelectLoading = () =>
   createSelector(
     selectMovie,
-    moviesDetailsPage => moviesDetailsPage.loading,
+    detailsMoviePage => detailsMoviePage.loading,
   );
 
 const makeSelectError = () =>
   createSelector(
     selectMovie,
-    moviesDetailsPage => moviesDetailsPage.error,
+    detailsMoviePage => detailsMoviePage.error,
   );
 
 export{

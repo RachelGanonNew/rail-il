@@ -7,7 +7,7 @@ import { getCurrentMovieSuccess, getCurrentMovieError, editCurrentMovieError, ed
 const baseUrl = "/api";
 
 export function* getCurrentMovie(action){
-  console.log('action',action);
+
   const requestURL = `${baseUrl}/getCurrentMovie/${action.id}`;
   try{
     const current = yield call(request, requestURL);
@@ -20,15 +20,9 @@ export function* getCurrentMovie(action){
 };
 
 export function* editCurrentMovie(action){
-
+  console.log('acion in edit',action);
   const requestURL = `${baseUrl}/update`;
-  const data = {
-    name: action.currentMovie.name,
-    year: action.currentMovie.year,
-    image: action.currentMovie.image,
-    director: action.currentMovie.director,
-    category: action.currentMovie.category,
-  };
+  const data = action.currentMovie;
   const options = {
     method: 'POST',
     headers: {

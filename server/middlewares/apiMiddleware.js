@@ -81,13 +81,13 @@ router.post('/update', (req, res) => {
 
 // Private functions
 const _getItem = (list, id) => {
-  console.log('getItem');
   const currentItem = list.find(item => item.id.toString() === id.toString());
   return currentItem;
 };
 
 
 const _updateItem = (list, updatedItem) => {
+  console.log('updatedItem',updatedItem);
   const newList = [...list];
   const currentItemIndex = newList.findIndex(
     item => item.id.toString() === updatedItem.id.toString(),
