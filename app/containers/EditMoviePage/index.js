@@ -9,13 +9,13 @@ import { connect } from 'react-redux';
 import reducer from './reducer';
 import saga from './saga';
 import { editCurrentMovie, getCurrentMovie } from './actions';
-import { makeSelectCurrentMovieError, makeSelectCurrentMovie } from './selectors';
+import { makeSelectCurrentMovieError,  makeSelectCurrentMovie } from './selectors';
 import AddMovieForm from '../../components/AddMovieForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import messages from './messages';
 
 export function EditMoviePage(props) {
-
+  
   useInjectReducer({ key: 'editMoviePage', reducer });
   useInjectSaga({ key: 'editMoviePage', saga });
 
@@ -28,11 +28,12 @@ export function EditMoviePage(props) {
 
   return (
     <>
-      {props.error && <div className="error">
-        <FormattedMessage {...messages.err} /></div>}
+      {props.error && <div className="error"><FormattedMessage {...messages.err} /></div>}
       <ErrorBoundary>
-        {props.currentMovie.id !== 0 && <AddMovieForm
-          currentMovie={props.currentMovie} parentCallback={props.submitEditCurrentMovie} />}
+        {props.currentMovie.id !== 0 &&
+         <AddMovieForm
+           currentMovie={props.currentMovie} 
+           parentCallback={props.submitEditCurrentMovie} />}
       </ErrorBoundary>
     </>
   );
@@ -50,7 +51,7 @@ EditMoviePage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   error: makeSelectCurrentMovieError(),
-  currentMovie: makeSelectCurrentMovie(),
+  currentMovie:  makeSelectCurrentMovie(),
 });
 
 function mapDispatchToProps(dispatch) {

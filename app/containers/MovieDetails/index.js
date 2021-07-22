@@ -37,7 +37,8 @@ export function DetailsMoviePage(props) {
     setRedirect(`/edit/${id}`);
   }
   if (redirect) {
-    return <Redirect to={redirect} />;
+    return <Redirect
+      to={redirect}/>
   }
   return (
     <>

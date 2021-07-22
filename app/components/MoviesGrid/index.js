@@ -10,6 +10,7 @@ export default function MoviesGrid({list}){
           {list && list.map(item=>
             <MovieCard 
               item={item}
+              key={item.id}
             ></MovieCard>
           )}
         </CardGroup>

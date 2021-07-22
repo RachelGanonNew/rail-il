@@ -8,7 +8,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 
 import Button from 'react-bootstrap/Button';
 import { Redirect } from 'react-router-dom';
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import MoviesGrid from '../../components/MoviesGrid';
 import { loadMovies } from './actions';
 import reducer from './reducer';
@@ -32,7 +32,7 @@ export function MoviesListPage({ moviesList, loading, error, onLoadMovies }) {
     return <Redirect to={redirect} />
   return(
     <div>
-      <Header />
+      {/* <Header /> */}
       <Button variant="primary" onClick={handleCreate}>CREATE</Button>{' '}
 
       {loading && <div className="loading">loading...</div>}

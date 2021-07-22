@@ -3,12 +3,6 @@ import { initialState } from './reducer';
 
 const selectEditMoviePageDomain = state => state.editMoviePage || initialState;
 
-const makeSelecteditMoviePage = () =>
-  createSelector(
-    selectEditMoviePageDomain,
-    editMoviePage => editMoviePage
-  );
-
 const makeSelectCurrentMovieError = () =>
   createSelector(
     selectEditMoviePageDomain,
@@ -53,7 +47,6 @@ const makeSelectCurrentMovieImage = () =>
     editMoviePage => editMoviePage.currentMovie.Poster,
   );
 export {
-  makeSelecteditMoviePage,
   makeSelectCurrentMovieError,
   makeSelectCurrentMovie,
   makeSelectCurrentMovieId,

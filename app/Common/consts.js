@@ -4,12 +4,12 @@ export const SOMETHING_WENT_WRONG = 'Opps, Something went wrong';
 
 
 export const MOVIE_NUMBER = 'Movie Number';
-export const NAME = 'Movie name';
+export const TITLE = 'Movie name';
 export const YEAR = 'Movie year';
 export const DIRECTOR = 'Movie derector';
 export const IMAGE = 'Movie image';
 export const CATEGORY = 'Movie category';
-
+export const PLOT = 'Movie description';
 
 
 export const API_KRY = '11c0d1b4';

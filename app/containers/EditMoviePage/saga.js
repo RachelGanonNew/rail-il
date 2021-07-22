@@ -20,7 +20,6 @@ export function* getCurrentMovie(action){
 };
 
 export function* editCurrentMovie(action){
-  console.log('acion in edit',action);
   const requestURL = `${baseUrl}/update`;
   const data = action.currentMovie;
   const options = {
