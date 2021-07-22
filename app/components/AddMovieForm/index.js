@@ -11,7 +11,7 @@ export function AddMovieForm(props) {
 
   const [newMovie, setNewMovie] = useState({
     Director: '', Genre: '',
-    Plot: '', Poster: '', Title: '', Year: ''
+    Plot: '', Poster: '', Title: '', Year: '',id:0
   });
   const [loading,setLoading] = useState(false);
   const [director, setDirector] = useState(currentMovie ? currentMovie.Director : '');
@@ -29,14 +29,14 @@ export function AddMovieForm(props) {
       Poster: poster,
       Title: title,
       Year: year,
+      id:currentMovie.id
 
     })
-
+    setLoading(true);
   }
   useEffect(() => {
-    if (!loading) {
+    if (loading) {
       props.parentCallback(newMovie);
-      setLoading(true);
     }
   }, [newMovie]);
   const onTitleChange = event => setTitle(event.target.value);

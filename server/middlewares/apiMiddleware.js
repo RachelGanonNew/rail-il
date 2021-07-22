@@ -62,6 +62,7 @@ router.get('/getCurrentMovie/:id', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
+
   fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const item = req.body;
@@ -87,7 +88,6 @@ const _getItem = (list, id) => {
 
 
 const _updateItem = (list, updatedItem) => {
-  console.log('updatedItem',updatedItem);
   const newList = [...list];
   const currentItemIndex = newList.findIndex(
     item => item.id.toString() === updatedItem.id.toString(),

@@ -20,6 +20,7 @@ export function* getCurrentMovie(action){
 };
 
 export function* editCurrentMovie(action){
+   
   const requestURL = `${baseUrl}/update`;
   const data = action.currentMovie;
   const options = {
@@ -31,13 +32,26 @@ export function* editCurrentMovie(action){
   };
   try{
     const newList = yield call(request, requestURL, options);
-    yield put(editCurrentMovieSuccess(newList));
-    
+    yield put(editCurrentMovieSuccess(newList));  
   }
   catch(err){
     editCurrentMovieError();
-  
   }
+}
+
+
+const InitData = (movie) =>{
+  const currentMovie = {
+    Director: movie.Director,
+    Genre:movie.Genre,
+    Plot: movie.Plot,
+    Poster:movie.Poster,
+    Rated: movie.Rated,
+    Title: movie.Title,
+    Year: movie.Year,
+    id: movie.id,
+  }
+  return currentMovie;
 }
 export default function* getNewMovieIdSaga() {
   yield takeEvery(GET_CURRENT_MOVIE, getCurrentMovie);
