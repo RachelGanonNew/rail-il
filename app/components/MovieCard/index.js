@@ -1,20 +1,28 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React,{ useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import PropTypes from 'prop-types';
-import messages from './messages';
+import { Redirect } from 'react-router-dom';
 
-export default function MovieCard({title, txt, imgSrc}) {
+export default function MovieCard({item}) {
+  const [redirect, setRedirect] = useState()
+  const clickCard = () => {
+    setRedirect(`/details/${item.id}`);
+  }
+  if (redirect) {
+    return <Redirect to={redirect} />;
+  }
   return (
         <>
-            <Card>
-              <Card.Img variant="top" src={imgSrc} />
+            <Card onClick={clickCard}>
+              <Card.Img variant="top" src={item.Poster} />
               <Card.Body>
                 <Card.Title>
-                  <FormattedMessage title={title} {...messages.title} />
+                  {item.Title}
+                  {/* <FormattedMessage title={item.Title} {...messages.title} /> */}
                 </Card.Title>
                 <Card.Text>
-                  <FormattedMessage txt={txt}{...messages.txt} />
+                  {item.Plot}
+                  {/* <FormattedMessage txt={item.Plot}{...messages.txt} /> */}
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -22,8 +30,6 @@ export default function MovieCard({title, txt, imgSrc}) {
   )
 }
 MovieCard.propTypes = {
-  title: PropTypes.string,
-  txt: PropTypes.string,
-  imgSrc: PropTypes.string,
+  item:PropTypes.oneOfType([PropTypes.object,PropTypes.bool])
 };
   

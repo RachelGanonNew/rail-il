@@ -52,7 +52,7 @@ router.post('/add', (req, res) => {
 });
 
 
-router.get('/get/:id', (req, res) => {
+router.get('/getCurrentMovie/:id', (req, res) => {
   fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const { id } = req.params;
@@ -81,6 +81,7 @@ router.post('/update', (req, res) => {
 
 // Private functions
 const _getItem = (list, id) => {
+  console.log('getItem');
   const currentItem = list.find(item => item.id.toString() === id.toString());
   return currentItem;
 };

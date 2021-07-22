@@ -6,10 +6,12 @@ import { getCurrentMovieSuccess, getCurrentMovieError, editCurrentMovieError, ed
 
 const baseUrl = "/api";
 
-export function* getCurrentMovie(){
-  const requestURL = `${baseUrl}/getCurrentMovie`;
+export function* getCurrentMovie(action){
+  console.log('action',action);
+  const requestURL = `${baseUrl}/getCurrentMovie/${action.id}`;
   try{
     const current = yield call(request, requestURL);
+
     yield put(getCurrentMovieSuccess(current));
   }
   catch(err){

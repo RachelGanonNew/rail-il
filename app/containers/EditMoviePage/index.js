@@ -14,9 +14,11 @@ import AddMovieForm from '../../components/AddMovieForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import messages from './messages';
 
-export function EditMoviePage({ onLoadCurrentMovie, submitEditCurrentMovie, error, id, currentMovie}) {
+export function EditMoviePage(props,{ onLoadCurrentMovie, submitEditCurrentMovie, error, currentMovie}) {
   useInjectReducer({ key: 'editMoviePage', reducer });
   useInjectSaga({ key: 'editMoviePage', saga });
+  const {id} = props.match.params;
+  console.log("EditMoviePage",id);
 
   useEffect(() => {
     onLoadCurrentMovie(id);
@@ -40,6 +42,7 @@ EditMoviePage.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   id: PropTypes.number,
   currentMovie:PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  match:PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
   
 

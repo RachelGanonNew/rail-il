@@ -9,12 +9,13 @@ import { CATEGORY, IMAGE, YEAR, NAME, DIRECTOR} from '../../Common/consts';
 export function AddMovieForm(props) {
   
   const [newMovie,setNewMovie] = useState({
-    name: props.currentMovie.name,
-    year:props.currentMovie.year,
-    director: props.currentMovie.director,
-    image: props.currentMovie.image,
-    category: props.currentMovie.category
+    name: props.currentMovie?props.currentMovie.name:'',
+    year:props.currentMovie?props.currentMovie.year:'',
+    director: props.currentMovie?props.currentMovie.director:'',
+    image: props.currentMovie?props.currentMovie.image:'',
+    category: props.currentMovie?props.currentMovie.category:''
   })
+  
   const handleSubmit = () =>{
     props.parentCallback(newMovie);
   }

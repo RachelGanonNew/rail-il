@@ -12,12 +12,12 @@ export const initialState = {
     director: '',
     image: '',
     category: ''
-
   },
-  
+  loading: false,
+  error: false,
 };
 
-const addMoviesPageReducer = (state = initialState, action) =>
+const getCurrentMoviePageReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
 
@@ -26,27 +26,21 @@ const addMoviesPageReducer = (state = initialState, action) =>
 
       case GET_CURRENT_MOVIE:
       case EDIT_CURRENT_MOVIE:
-        draft.currentMovie.error = false;
-        
+        draft.loading = true;
+        draft.error = true;
         break;
 
       case GET_CURRENT_MOVIE_SUCCESS:
         draft.currentMovie = action.currentMovie;
         draft.currentMovie.error = false;
+        draft.loading = false;
+        draft.error = false;
         break;
 
       case GET_CURRENT_MOVIE_ERROR:
       case EDIT_CURRENT_MOVIE_ERROR:
-        draft.currentMovie =  {
-          error: false,
-          id: 0,
-          name: '',
-          year: '',
-          director: '',
-          image: '',
-          category: ''
-        
-        }  
+        draft.loading = false;
+        draft.error = true;
         break;
       case EDIT_CURRENT_MOVIE_SUCCESS:      
         draft.currentMovie = action.currentMovie;
@@ -58,4 +52,4 @@ const addMoviesPageReducer = (state = initialState, action) =>
     }
   });
 
-export default addMoviesPageReducer;
+export default getCurrentMoviePageReducer;

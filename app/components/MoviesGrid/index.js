@@ -9,9 +9,7 @@ export default function MoviesGrid({list}){
         <CardGroup>
           {list && list.map(item=>
             <MovieCard 
-              title={item.Title} 
-              imgSrc={item.Poster}
-              txt={item.Plot}
+              item={item}
             ></MovieCard>
           )}
         </CardGroup>
