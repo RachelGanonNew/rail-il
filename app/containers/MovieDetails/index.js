@@ -29,7 +29,7 @@ export function DetailsMoviePage(props) {
   };
   
   const ReactStars = ({ value }) => {
-    return <ReactStarsRating onChange={onChange} value={props.currentMovie.Rated} />;
+    return <ReactStarsRating onChange={onChange} value={props.currentMovie.Rated} isHalf={false} />;
   };
   useEffect(() => {
 

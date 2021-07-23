@@ -1,15 +1,11 @@
 import React,{ useState } from 'react';
 import Card from 'react-bootstrap/Card'
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 import './movieCard.scss';
+import { history } from '../../utils/history';
 export default function MovieCard({item}) {
-  const [redirect, setRedirect] = useState()
   const clickCard = () => {
-    setRedirect(`/details/${item.id}`);
-  }
-  if (redirect) {
-    return <Redirect push  to={redirect} />;
+    history.push(`/details/${item.id}`);
   }
   return (
         <>

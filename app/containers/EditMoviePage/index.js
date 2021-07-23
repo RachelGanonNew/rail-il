@@ -13,20 +13,24 @@ import { makeSelectCurrentMovieError,  makeSelectCurrentMovie } from './selector
 import AddMovieForm from '../../components/AddMovieForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import messages from './messages';
-
+import {POP} from '../../Common/consts';
+import {history } from '../../utils/history';
 export function EditMoviePage(props) {
   
   useInjectReducer({ key: 'editMoviePage', reducer });
   useInjectSaga({ key: 'editMoviePage', saga });
 
   const { id } = props.match.params;
-
+  console.log('props id',props);
   useEffect(() => {
     if (props.currentMovie === undefined || props.currentMovie.id === 0)
       props.onLoadCurrentMovie(id);
   });
-
-  return (
+  if(props.history.action === POP){
+    history.push(`/details/${id}`)
+  }
+  else 
+    return (
     <>
       {props.error && <div className="error"><FormattedMessage {...messages.err} /></div>}
       <ErrorBoundary>
@@ -46,6 +50,7 @@ EditMoviePage.propTypes = {
   id: PropTypes.number,
   currentMovie: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   match: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
 };
 
 

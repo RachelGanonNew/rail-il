@@ -21,9 +21,9 @@ export function AddMovieForm(props) {
   const [poster, setPoster] = useState(currentMovie ? currentMovie.Poster : '');
   const [title, setTitle] = useState(currentMovie ? currentMovie.Title : '');
   const [year, setYear] = useState(currentMovie ? currentMovie.Year : '');
-  // const handleCancel = () => {
-  //   props.history.goBack();
-  // }
+  const handleCancel = () => {
+    history.goBack();
+  }
   const handleSubmit = () => {
     setNewMovie({
       Director: director,
@@ -78,7 +78,7 @@ export function AddMovieForm(props) {
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         <FormattedMessage {...messages.submit} />
       </Button>
-      <Button variant="primary" type="submit" onClick={history.goBack}>
+      <Button variant="primary" type="submit" onClick={handleCancel}>
         <FormattedMessage {...messages.cancel} />
       </Button>
     </Form>

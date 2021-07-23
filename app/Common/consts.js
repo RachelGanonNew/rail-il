@@ -11,7 +11,7 @@ export const IMAGE = 'Movie image';
 export const CATEGORY = 'Movie category';
 export const PLOT = 'Movie description';
 
-
+export const POP="POP";
 // export const API_KRY = '11c0d1b4';
 // export const OMD_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KRY}`;
 

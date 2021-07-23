@@ -3,7 +3,8 @@ const fs = require('fs');
 const router = express.Router();
 const BASE_DIR = __dirname.replace('middlewares', '');
 const jsonMoviesPath = `${BASE_DIR}\\data\\moviesData.json`;
-
+// const URL = `https://api.nytimes.com/svc/archive/v1/2019/1.json?api-key=${API_KEY}`;
+// const API_KEY = `2vG2AA9QISQP3AyO5fAGuwNLayZcYSFm`;
 const bodyParser = require('body-parser');
 
 router.use(
@@ -62,7 +63,7 @@ router.get('/getCurrentMovie/:id', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
-console.log('in update:',req.body);
+
   fs.readFile(jsonMoviesPath, 'utf8', (err, data) => {
     const list = JSON.parse(data);
     const item = req.body;
