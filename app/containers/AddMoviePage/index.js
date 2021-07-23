@@ -14,8 +14,9 @@ import './MoviesList.scss';
 import { makeSelectNewMovieIdError, makeSelectNewMovieId, makeSelectAddMoviePage} from './selectors';
 import AddMovieForm from '../../components/AddMovieForm';
 import ErrorBoundary from '../../components/ErrorBoundary';
-
-export function AddMoviePage({ onLoadAddMovie, submitAddNewMovie, error, newId}) {
+import { history } from '../../utils/history';
+import { POP } from '../../Common/consts';
+export function AddMoviePage(props) {
   useInjectReducer({ key: 'addTrasportaionPage', reducer });
   useInjectSaga({ key: 'addTrasportaionPage', saga });
 
@@ -28,9 +29,9 @@ export function AddMoviePage({ onLoadAddMovie, submitAddNewMovie, error, newId})
     category: ''
   });
   useEffect(() => {
-    onLoadAddMovie();
+    props.onLoadAddMovie();
     setNewMovie({
-      id: newId,
+      id: props.newId,
       name: '',
       year: '',
       director: '',
@@ -38,19 +39,22 @@ export function AddMoviePage({ onLoadAddMovie, submitAddNewMovie, error, newId})
       category: ''
     })
   });
-
-  return (
+  if(props.history.action === POP){
+    history.push(`/moviesList`);
+  }
+  else 
+    return (
     <>
    
-      {error && <div className="error">
+      {props.error && <div className="error">
         <FormattedMessage {...messages.err} />
       </div>}
       <ErrorBoundary>
         <AddMovieForm
-          currentMovie={newMovie} parentCallback = {submitAddNewMovie}/>
+          currentMovie={newMovie} parentCallback = {props.submitAddNewMovie}/>
       </ErrorBoundary>
     </>
-  );
+    );
 }
 AddMoviePage.propTypes = {
   onLoadAddMovie: PropTypes.func,
