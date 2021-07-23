@@ -2,3 +2,6 @@ export const GET_CURRENT_MOVIE = 'app/DetailsMoviePage/GET_CURRENT_MOVIE';
 export const GET_CURRENT_MOVIE_SUCCESS = 'app/DetailsMoviePage/GET_CURRENT_MOVIE_SUCCESS';
 export const GET_CURRENT_MOVIE_ERROR = 'app/DetailsMoviePage/GET_CURRENT_MOVIE_ERROR';
 
+export const RATING_CURRENT_MOVIE = 'app/DetailsMoviePage/RATING_CURRENT_MOVIE';
+export const RATING_CURRENT_MOVIE_SUCCESS = 'app/DetailsMoviePage/RATING_CURRENT_MOVIE_SUCCESS';
+export const RATING_CURRENT_MOVIE_ERROR = 'app/DetailsMoviePage/RATING_CURRENT_MOVIE_ERROR';

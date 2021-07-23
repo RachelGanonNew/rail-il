@@ -3,24 +3,27 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { history } from '../../utils/history';
 import messages from './messages';
-// import { CATEGORY, IMAGE, YEAR, TITLE, PLOT, DIRECTOR } from '../../Common/consts';
-
+import { CATEGORY, IMAGE, YEAR, TITLE, PLOT, DIRECTOR } from '../../Common/consts';
+import './create.scss';
 export function AddMovieForm(props) {
   const { currentMovie } = props;
 
   const [newMovie, setNewMovie] = useState({
     Director: '', Genre: '',
-    Plot: '', Poster: '', Title: '', Year: '',id:0
+    Plot: '', Poster: '', Title: '', Year: '', id: 0
   });
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [director, setDirector] = useState(currentMovie ? currentMovie.Director : '');
   const [genre, setGenre] = useState(currentMovie ? currentMovie.Genre : '');
   const [plot, setPlot] = useState(currentMovie ? currentMovie.Plot : '');
   const [poster, setPoster] = useState(currentMovie ? currentMovie.Poster : '');
   const [title, setTitle] = useState(currentMovie ? currentMovie.Title : '');
   const [year, setYear] = useState(currentMovie ? currentMovie.Year : '');
-
+  // const handleCancel = () => {
+  //   props.history.goBack();
+  // }
   const handleSubmit = () => {
     setNewMovie({
       Director: director,
@@ -29,7 +32,7 @@ export function AddMovieForm(props) {
       Poster: poster,
       Title: title,
       Year: year,
-      id:currentMovie.id
+      id: currentMovie.id
 
     })
     setLoading(true);
@@ -47,13 +50,13 @@ export function AddMovieForm(props) {
   const onYearChange = event => setYear(event.target.value);
   return (
 
-    <Form>
+    <Form className="form">
       <Form.Group className="mb-3" >
-        <Form.Control type="text" value={title} onChange={onTitleChange} />
+        <Form.Control type="text" value={title} onChange={onTitleChange} placeholder={TITLE} />
       </Form.Group>
 
       <Form.Group className="mb-3" >
-        <Form.Control type="text" value={director} onChange={onDirectorChange} />
+        <Form.Control type="text" value={director} onChange={onDirectorChange} placeholder={DIRECTOR} />
       </Form.Group>
 
       {/* <Form.Group className="mb-3" >
@@ -61,26 +64,30 @@ export function AddMovieForm(props) {
       </Form.Group> */}
 
       <Form.Group className="mb-3">
-        <Form.Control type="text" value={plot} onChange={onPlotChange} />
+        <Form.Control type="text" value={plot} onChange={onPlotChange} placeholder={PLOT} />
       </Form.Group>
 
       <Form.Group className="mb-3" >
-        <Form.Control type="text" value={year} onChange={onYearChange} />
+        <Form.Control type="text" value={year} onChange={onYearChange} placeholder={YEAR} />
       </Form.Group>
 
       <Form.Group className="mb-3" >
-        <Form.Control type="text" value={genre} onChange={onGenreChange} />
+        <Form.Control type="text" value={genre} onChange={onGenreChange} placeholder={CATEGORY} />
       </Form.Group>
 
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         <FormattedMessage {...messages.submit} />
+      </Button>
+      <Button variant="primary" type="submit" onClick={history.goBack}>
+        <FormattedMessage {...messages.cancel} />
       </Button>
     </Form>
   )
 }
 AddMovieForm.propTypes = {
   parentCallback: PropTypes.func,
-  currentMovie: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
+  currentMovie: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  history: PropTypes.oneOfType([PropTypes.object, PropTypes.bool])
 };
 
 

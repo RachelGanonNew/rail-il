@@ -6,49 +6,50 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import { Redirect } from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
 import ReactStarsRating from 'react-awesome-stars-rating';
 import reducer from './reducer';
 import saga from './saga';
-import { getCurrentMovie } from './actions';
-import { makeSelectMovieDetails, makeSelectError, makeSelectLoading } from './selectors';
-
+import { history } from '../../utils/history';
+import { getCurrentMovie, ratingCurrentMovie } from './actions';
+import { makeSelectMovieDetails, makeSelectError, makeSelectLoading, makeSelectRated } from './selectors';
+import './details.scss';
 export function DetailsMoviePage(props) {
 
   useInjectReducer({ key: 'detailsMoviePage', reducer });
   useInjectSaga({ key: 'detailsMoviePage', saga });
 
-  const [value, setValue] = useState();
-  const [redirect, setRedirect] = useState();
+  const [rating, setRating] = useState();
+  // const [redirect, setRedirect] = useState();
   const { id } = props.match.params;
 
-  const onChange = (v) => {
-    setValue(v);
+  const onChange = (value) => {
+    setRating(value);
+    props.onRatingCurrentMovie(props.currentMovie,rating);
   };
-
-  const ReactStarsExample = (v) => <ReactStarsRating onChange={onChange} value={v} />;
+  
+  const ReactStars = ({ value }) => {
+    return <ReactStarsRating onChange={onChange} value={props.currentMovie.Rated} />;
+  };
   useEffect(() => {
 
     if (props.currentMovie === undefined || props.currentMovie.id === 0)
       props.onLoadCurrentMovie(id);
   });
   const handleEdit = () => {
-    setRedirect(`/edit/${id}`);
+    history.push(`/edit/${id}`);
   }
-  if (redirect) {
-    return <Redirect
-      to={redirect}/>
-  }
+
   return (
     <>
       {props.currentMovie.id !== 0 &&
         <>
+        <div className="warpperDetails">
           <Button variant="primary" onClick={handleEdit}>EDIT</Button>{' '}
           <Card >
-            <Card.Img variant="top" src={props.currentMovie.Poster} fluid="true" />
+            <Card.Img  src={props.currentMovie.Poster} fluid="true" />
             <Card.Body>
-              <ReactStarsExample value={value} />
+              <ReactStars  />
               <Card.Text>
                 {props.currentMovie.Year}
               </Card.Text>
@@ -61,6 +62,7 @@ export function DetailsMoviePage(props) {
 
             </Card.Body>
           </Card>
+        </div>
         </>
       }
     </>
@@ -74,6 +76,8 @@ DetailsMoviePage.propTypes = {
   id: PropTypes.number,
   currentMovie: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   match: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  onRatingCurrentMovie:PropTypes.any,
+  rated:PropTypes.any,
 };
 
 
@@ -86,6 +90,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLoadCurrentMovie: (id) => dispatch(getCurrentMovie(id)),
+    onRatingCurrentMovie: (currentMovie, rating) => dispatch(ratingCurrentMovie(currentMovie,rating))
   };
 }
 

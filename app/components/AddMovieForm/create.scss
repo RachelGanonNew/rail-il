@@ -1,0 +1,8 @@
+.form{
+    display: grid !important;
+    margin: 2%;
+    align-items: center !important;
+    text-align: center !important;
+    grid-template-rows: fit-content(30%) fit-content(30%) auto !important;
+    grid-gap: 20px 15px !important;
+}

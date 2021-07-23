@@ -5,21 +5,18 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-
 import Button from 'react-bootstrap/Button';
-import { Redirect } from 'react-router-dom';
-// import Header from '../../components/Header';
+import { history } from '../../utils/history';
 import MoviesGrid from '../../components/MoviesGrid';
 import { loadMovies } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import { makeSelectMoviesList, makeSelectLoading, makeSelectError } from './selectors'
-
+import './list.scss';
 
 export function MoviesListPage({ moviesList, loading, error, onLoadMovies }) {
-  const [redirect, setRedirect] = useState();
   const handleCreate = () => {
-    setRedirect('/create');
+    history.push('/create');
   }
   useInjectReducer({ key: 'moviesListPage', reducer });
   useInjectSaga({ key: 'moviesListPage', saga });
@@ -28,11 +25,8 @@ export function MoviesListPage({ moviesList, loading, error, onLoadMovies }) {
     if (!moviesList) onLoadMovies();
   }, []);
   
-  if (redirect)
-    return <Redirect to={redirect} />
   return(
-    <div>
-      {/* <Header /> */}
+    <div className="warpper">
       <Button variant="primary" onClick={handleCreate}>CREATE</Button>{' '}
 
       {loading && <div className="loading">loading...</div>}

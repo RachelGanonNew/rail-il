@@ -14,7 +14,11 @@ const makeSelectLoading = () =>
     selectMovie,
     detailsMoviePage => detailsMoviePage.loading,
   );
-
+  const makeSelectRated = () =>
+  createSelector(
+    selectMovie,
+    detailsMoviePage => detailsMoviePage.currentMovie.Rated,
+  );
 const makeSelectError = () =>
   createSelector(
     selectMovie,
@@ -25,4 +29,5 @@ export{
   makeSelectMovieDetails,
   makeSelectLoading,
   makeSelectError,
+  makeSelectRated
 };

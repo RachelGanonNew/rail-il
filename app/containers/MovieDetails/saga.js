@@ -1,8 +1,9 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 
-import { GET_CURRENT_MOVIE } from './constants';
-import { getCurrentMovieSuccess, getCurrentMovieError } from './actions';
+import { GET_CURRENT_MOVIE, RATING_CURRENT_MOVIE } from './constants';
+import { getCurrentMovieSuccess, getCurrentMovieError, ratingCurrentMovieError,ratingCurrentMovieSuccess } from './actions';
+
 
 const baseUrl = "/api";
 
@@ -17,34 +18,31 @@ export function* getCurrentMovie(action){
   }
 };
 
-// export function* editCurrentMovie(action){
+export function* editCurrentMovie(action){
+  console.log('action is:',action);
+  const requestURL = `${baseUrl}/update`;
 
-//   const requestURL = `${baseUrl}/update`;
-//   const data = {
-//     name: action.currentMovie.name,
-//     year: action.currentMovie.year,
-//     image: action.currentMovie.image,
-//     director: action.currentMovie.director,
-//     category: action.currentMovie.category,
-//   };
-//   const options = {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data),
-//   };
-//   try{
-//     const newList = yield call(request, requestURL, options);
-//     yield put(editCurrentMovieSuccess(newList));
+  console.log(' action.currentMovie', action.currentMovie);
+  const data = action.currentMovie;
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  };
+  try{
+    const newList = yield call(request, requestURL, options);
+    yield put(ratingCurrentMovieSuccess(newList));
     
-//   }
-//   catch(err){
-//     editCurrentMovieError();
+  }
+  catch(err){
+    ratingCurrentMovieError();
   
-//   }
-// }
+  }
+}
 export default function* getNewMovieIdSaga() {
   yield takeEvery(GET_CURRENT_MOVIE, getCurrentMovie);
-  // yield takeEvery (EDIT_CURRENT_MOVIE, editCurrentMovie);
+  yield takeEvery (RATING_CURRENT_MOVIE, editCurrentMovie);
 }
