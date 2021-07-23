@@ -38,7 +38,7 @@ const getCurrentMoviePageReducer = (state = initialState, action) =>
         break;
       case RATING_CURRENT_MOVIE_SUCCESS:
         
-        draft.currentMovie.Rated = action.Rated;
+        draft.currentMovie = action.currentMovie;
         break;
 
       case GET_CURRENT_MOVIE_ERROR:

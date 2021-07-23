@@ -20,12 +20,12 @@ export function DetailsMoviePage(props) {
   useInjectSaga({ key: 'detailsMoviePage', saga });
 
   const [rating, setRating] = useState();
-  // const [redirect, setRedirect] = useState();
   const { id } = props.match.params;
 
   const onChange = (value) => {
     setRating(value);
-    props.onRatingCurrentMovie(props.currentMovie,rating);
+    props.currentMovie.Rated = value;
+    props.onRatingCurrentMovie(props.currentMovie);
   };
   
   const ReactStars = ({ value }) => {
@@ -90,7 +90,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLoadCurrentMovie: (id) => dispatch(getCurrentMovie(id)),
-    onRatingCurrentMovie: (currentMovie, rating) => dispatch(ratingCurrentMovie(currentMovie,rating))
+    onRatingCurrentMovie: (currentMovie) => dispatch(ratingCurrentMovie(currentMovie))
   };
 }
 

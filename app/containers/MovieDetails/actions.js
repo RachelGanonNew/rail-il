@@ -32,10 +32,10 @@ export function getCurrentMovieError(error) {
 
 
 
-export function ratingCurrentMovie(currentMovie,rating) {
+export function ratingCurrentMovie(currentMovie) {
   return {
     type: RATING_CURRENT_MOVIE,
-    currentMovie, rating
+    currentMovie
   };
 };
 
