@@ -13,12 +13,10 @@ export default function MovieCard({item}) {
               <Card.Img variant="top" src={item.Poster} thumbnail="true" />
               <Card.Body>
                 <Card.Title>
-                  {item.Title}
-                  {/* <FormattedMessage title={item.Title} {...messages.title} /> */}
+                  Title
                 </Card.Title>
                 <Card.Text>
-                  {item.Plot}
-                  {/* <FormattedMessage txt={item.Plot}{...messages.txt} /> */}
+                  {item.Title}
                 </Card.Text>
               </Card.Body>
             </Card>

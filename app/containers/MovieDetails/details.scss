@@ -1,16 +1,12 @@
 .warpperDetails{
-    margin-top: 0px !important;
-    display: grid !important;
-    align-items: center !important;
-    text-align: center !important;
-    grid-template-rows: fit-content(50%) fit-content(50%) auto !important;
-    // grid-template-columns: repeat(2, 1fr) !important;
-    grid-gap: 20px 15px !important;
+    // margin-top: 0px !important;
+    // display: grid !important;
+    // align-items: center !important;
+    // text-align: center !important;
+    // grid-template-rows: fit-content(50%) fit-content(50%) auto !important;
+    // // grid-template-columns: repeat(2, 1fr) !important;
+    // grid-gap: 20px 15px !important;
 }
-.card-img, .card-img-bottom, .card-img-top {
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    width: 80%;
-    margin-left: 10%;
-    height: 30rem;
+.card-img, .card-img-bottom, .card-img-top{
+    height: 21rem;
 }

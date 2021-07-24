@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardGroup from 'react-bootstrap/CardGroup'
+import CardGroup from 'react-bootstrap/CardGroup';
+import Container from 'react-bootstrap/Container'
 import MovieCard from '../MovieCard/index';
+import './moviesGrid.scss';
+import { Col, Row } from 'react-bootstrap';
 export default function MoviesGrid({list}){
 
   return(
         <>
-        <CardGroup>
-          {list && list.map(item=>
-            <MovieCard 
-              item={item}
-              key={item.id}
-            ></MovieCard>
-          )}
-        </CardGroup>
+        <Container fluid>
+          
+          <CardGroup className="Grid">
+            {list && list.map(item=>
+              <MovieCard 
+                item={item}
+                key={item.id}
+              ></MovieCard>
+            )}
+          </CardGroup>
+
+        </Container>
         </>
   )
 }

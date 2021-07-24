@@ -1,0 +1,32 @@
+// .Grid {
+//     display: flex;
+//     flex-wrap: wrap;
+    
+//     &-item {
+//       width: 100%;
+//       margin-top: 2%;
+      
+//       @media (min-width: 48rem) {
+//         width: 49%;
+//         &:nth-child(odd) {
+//           margin-right: 2%;
+//         }
+//       }
+      
+//       @media (min-width: 62rem) {
+//         width: 23.5%;
+//         &:not(:nth-child(4n)) {
+//           margin-right: 2%;
+//         }
+//       }
+      
+//       &:before {
+//         content: "";
+//         float: left;
+//         padding-top: 100%;
+//       }
+//     }
+//   }
+.Grid{
+    
+}

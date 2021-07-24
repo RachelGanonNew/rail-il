@@ -20,23 +20,16 @@ export function AddMoviePage(props) {
   useInjectReducer({ key: 'addTrasportaionPage', reducer });
   useInjectSaga({ key: 'addTrasportaionPage', saga });
 
-  const [newMovie,setNewMovie] = useState( {
-    id: 0,
-    name: '',
-    year: '',
-    director: '',
-    image: '',
-    category: ''
+  const [newMovie, setNewMovie] = useState({
+    Director: '', Genre: '',
+    Plot: '', Poster: '', Title: '', Year: '', id: 0
   });
   useEffect(() => {
     props.onLoadAddMovie();
     setNewMovie({
       id: props.newId,
-      name: '',
-      year: '',
-      director: '',
-      image: '',
-      category: ''
+      Director: '', Genre: '',
+      Plot: '', Poster: '', Title: '', Year: ''
     })
   });
   if(props.history.action === POP){

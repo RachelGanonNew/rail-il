@@ -14,6 +14,7 @@ import { history } from '../../utils/history';
 import { getCurrentMovie, ratingCurrentMovie } from './actions';
 import { makeSelectMovieDetails, makeSelectError, makeSelectLoading, makeSelectRated } from './selectors';
 import './details.scss';
+import Header from '../../components/Header';
 export function DetailsMoviePage(props) {
 
   useInjectReducer({ key: 'detailsMoviePage', reducer });
@@ -42,6 +43,7 @@ export function DetailsMoviePage(props) {
 
   return (
     <>
+    <Header></Header>
       {props.currentMovie.id !== 0 &&
         <>
         <div className="warpperDetails">
