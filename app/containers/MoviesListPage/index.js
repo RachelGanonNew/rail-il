@@ -29,8 +29,8 @@ export function MoviesListPage({ moviesList, loading, error, onLoadMovies }) {
     <div className="warpper">
       <Button variant="primary" onClick={handleCreate}>CREATE</Button>{' '}
 
-      {loading && <div className="loading">loading...</div>}
-      {error && <div className="error">error accured</div>}
+      {/* {loading && <div className="loading">loading...</div>} */}
+      {/* {error && <div className="error">error accured</div>} */}
       <MoviesGrid list={moviesList} />
     </div>
   )
