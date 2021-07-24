@@ -21,15 +21,14 @@ export function EditMoviePage(props) {
   useInjectSaga({ key: 'editMoviePage', saga });
 
   const { id } = props.match.params;
-  console.log('props id',props);
   useEffect(() => {
     if (props.currentMovie === undefined || props.currentMovie.id === 0)
       props.onLoadCurrentMovie(id);
   });
-  if(props.history.action === POP){
-    history.push(`/details/${id}`)
-  }
-  else 
+  // if(props.history.action === POP){
+  //   history.push(`/details/${id}`)
+  // }
+  // else 
     return (
     <>
       {props.error && <div className="error"><FormattedMessage {...messages.err} /></div>}
@@ -40,7 +39,7 @@ export function EditMoviePage(props) {
            parentCallback={props.submitEditCurrentMovie} />}
       </ErrorBoundary>
     </>
-  );
+    );
 }
 
 EditMoviePage.propTypes = {

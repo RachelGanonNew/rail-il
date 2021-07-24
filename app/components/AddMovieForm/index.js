@@ -10,11 +10,6 @@ import './create.scss';
 export function AddMovieForm(props) {
   const { currentMovie } = props;
 
-  const [newMovie, setNewMovie] = useState({
-    Director: '', Genre: '',
-    Plot: '', Poster: '', Title: '', Year: '', id: 0
-  });
-  const [loading, setLoading] = useState(false);
   const [director, setDirector] = useState(currentMovie ? currentMovie.Director : '');
   const [genre, setGenre] = useState(currentMovie ? currentMovie.Genre : '');
   const [plot, setPlot] = useState(currentMovie ? currentMovie.Plot : '');
@@ -25,7 +20,7 @@ export function AddMovieForm(props) {
     history.goBack();
   }
   const handleSubmit = () => {
-    setNewMovie({
+    const newMovie = {
       Director: director,
       Genre: genre,
       Plot: plot,
@@ -33,15 +28,10 @@ export function AddMovieForm(props) {
       Title: title,
       Year: year,
       id: currentMovie.id
-
-    })
-    setLoading(true);
+    };
+    props.parentCallback(newMovie);
   }
-  useEffect(() => {
-    if (loading) {
-      props.parentCallback(newMovie);
-    }
-  }, [newMovie]);
+
   const onTitleChange = event => setTitle(event.target.value);
   const onDirectorChange = event => setDirector(event.target.value);
   const onGenreChange = event => setGenre(event.target.value);
