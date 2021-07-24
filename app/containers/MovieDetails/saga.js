@@ -1,48 +1,50 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery,select } from 'redux-saga/effects';
 import request from 'utils/request';
 
 import { GET_CURRENT_MOVIE, RATING_CURRENT_MOVIE } from './constants';
 import { getCurrentMovieSuccess, getCurrentMovieError, ratingCurrentMovieError,ratingCurrentMovieSuccess } from './actions';
-
-
-const baseUrl = "/api";
+import * as selectors from '../MoviesListPage/selectors';
 
 export function* getCurrentMovie(action){
-  const requestURL = `${baseUrl}/getCurrentMovie/${action.id}`;
-  try{
-    const current = yield call(request, requestURL);
-    yield put(getCurrentMovieSuccess(current));
-  }
-  catch(err){
-    yield put(getCurrentMovieError(err));
+  const currentList = yield select(selectors.makeSelectMoviesList());
+  if(currentList !== false){
+    try{
+      const current = _getItem(currentList,action.id);
+      yield put(getCurrentMovieSuccess(current));
+    }
+    catch(err){
+      yield put(getCurrentMovieError(err));
+    }
   }
 };
 
 export function* editCurrentMovie(action){
-  console.log('action is:',action);
-  const requestURL = `${baseUrl}/update`;
-
-  console.log(' action.currentMovie', action.currentMovie);
-  const data = action.currentMovie;
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data),
-  };
-  try{
-    const newList = yield call(request, requestURL, options);
-    yield put(ratingCurrentMovieSuccess(newList));
-    
-  }
-  catch(err){
-    ratingCurrentMovieError();
-  
+  const currentList = yield select(selectors.makeSelectMoviesList());
+  if(currentList !== false){
+    try{
+      const newList = _updateItem(currentList,action.currentMovie);
+      yield put(ratingCurrentMovieSuccess(newList));  
+    }
+    catch(err){
+      yield put(ratingCurrentMovieError()); 
+    }
   }
 }
 export default function* getNewMovieIdSaga() {
   yield takeEvery(GET_CURRENT_MOVIE, getCurrentMovie);
   yield takeEvery (RATING_CURRENT_MOVIE, editCurrentMovie);
 }
+const _getItem = (list, id) => {
+  const currentItem = list.find(item => item.id.toString() === id.toString());
+  return currentItem;
+};
+
+
+const _updateItem = (list, updatedItem) => {
+  const newList = [...list];
+  const currentItemIndex = newList.findIndex(
+    item => item.id.toString() === updatedItem.id.toString(),
+  );
+  newList[currentItemIndex] = updatedItem;
+  return newList;
+};

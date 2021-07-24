@@ -5,9 +5,6 @@ import { movieLoaded, movieLoadingError } from './actions';
 import { API_URL } from '../../Common/consts';
 import * as selectors from './selectors';
 
-// const baseUrl = "/api";
-
-
 export function* getMovies() {
   const requestURL = `${API_URL}`;
   const currentList = yield select(selectors.makeSelectMoviesList());

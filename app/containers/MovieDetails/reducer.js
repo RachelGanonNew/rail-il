@@ -36,9 +36,10 @@ const getCurrentMoviePageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = false;
         break;
-      case RATING_CURRENT_MOVIE_SUCCESS:
-        
+      case RATING_CURRENT_MOVIE_SUCCESS:   
         draft.currentMovie = action.currentMovie;
+        window.open("/moviesList", "_self");
+
         break;
 
       case GET_CURRENT_MOVIE_ERROR:
