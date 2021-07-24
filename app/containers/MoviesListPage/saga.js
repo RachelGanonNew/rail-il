@@ -1,21 +1,26 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import request from 'utils/request';
 import { LOAD_MOVIES } from './constants';
 import { movieLoaded, movieLoadingError } from './actions';
 import { API_URL } from '../../Common/consts';
+import * as selectors from './selectors';
 
 // const baseUrl = "/api";
 
 
 export function* getMovies() {
-  // const requestURL = `${baseUrl}/movies/list`;
   const requestURL = `${API_URL}`;
-  try {
-    const list = yield call(request, requestURL);
-    const res = initList(list);
-    yield  put(movieLoaded(res));
-  } catch (err) {
-    yield put(movieLoadingError(err));
+  const currentList = yield select(selectors.makeSelectMoviesList());
+  if(currentList === false)
+  {
+    try {
+      const list = yield call(request, requestURL);
+      const res = initList(list);
+      yield  put(movieLoaded(res));
+      
+    } catch (err) {
+      yield put(movieLoadingError(err));
+    }
   }
 }
 export default function* loadMoviesData() {
@@ -23,7 +28,6 @@ export default function* loadMoviesData() {
 }
 
 const initList = (list) => {
-  console.log('list in init',list);
   const res = [];
   let i = 0;
   while(i<6){
