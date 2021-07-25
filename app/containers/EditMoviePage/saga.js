@@ -1,55 +1,50 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects';
-import request from 'utils/request';
+import {  put, takeEvery, select } from 'redux-saga/effects';
 
 import { GET_CURRENT_MOVIE, EDIT_CURRENT_MOVIE } from './constants';
-import { getCurrentMovieSuccess, getCurrentMovieError, editCurrentMovieError, editCurrentMovieSuccess } from './actions';
+// import { UPDATE_LIST } from '../MoviesListPage/constants';
+import { updateListError, updateListSuccess } from '../MoviesListPage/actions';
+import {
+  getCurrentMovieSuccess, getCurrentMovieError,
+  editCurrentMovieError, editCurrentMovieSuccess,
+} from './actions';
 
 import * as selectors from '../MoviesListPage/selectors';
 
-export function* getCurrentMovie(action){
+export function* getCurrentMovie(action) {
   const currentList = yield select(selectors.makeSelectMoviesList());
-  if(currentList !== false){
-    try{
-      const current = _getItem(currentList,action.id);
+  if (currentList !== false) {
+    try {
+      const current = _getItem(currentList, action.id);
       yield put(getCurrentMovieSuccess(current));
     }
-    catch(err){
+    catch (err) {
       yield put(getCurrentMovieError(err));
     }
   }
 };
 
-export function* editCurrentMovie(action){
-  debugger
+export function* editCurrentMovie(action) {
   const currentList = yield select(selectors.makeSelectMoviesList());
-  if(currentList !== false){
-    try{
-      const newList = _updateItem(currentList,action.currentMovie);
-      yield put(editCurrentMovieSuccess(newList));  
+  if (currentList !== false) {
+    try {
+      const newList = _updateItem(currentList, action.currentMovie);  
+      yield put(updateListSuccess(newList));
+      yield put(editCurrentMovieSuccess(action.currentMovie));
+
     }
-    catch(err){
-      yield put(editCurrentMovieError()); 
+    catch (err) {
+      yield put(editCurrentMovieError());
+      yield put(updateListError());
+
     }
   }
 }
 
 
-const InitData = (movie) =>{
-  const currentMovie = {
-    Director: movie.Director,
-    Genre:movie.Genre,
-    Plot: movie.Plot,
-    Poster:movie.Poster,
-    Rated: movie.Rated,
-    Title: movie.Title,
-    Year: movie.Year,
-    id: movie.id,
-  }
-  return currentMovie;
-}
+
 export default function* getNewMovieIdSaga() {
   yield takeEvery(GET_CURRENT_MOVIE, getCurrentMovie);
-  yield takeEvery (EDIT_CURRENT_MOVIE, editCurrentMovie);
+  yield takeEvery(EDIT_CURRENT_MOVIE, editCurrentMovie);
 }
 
 const _getItem = (list, id) => {

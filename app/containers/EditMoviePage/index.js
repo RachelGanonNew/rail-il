@@ -25,10 +25,10 @@ export function EditMoviePage(props) {
     if (props.currentMovie === undefined || props.currentMovie.id === 0)
       props.onLoadCurrentMovie(id);
   });
-  // if(props.history.action === POP){
-  //   history.push(`/details/${id}`)
-  // }
-  // else 
+  if(props.history.action === POP){
+    history.push(`/details/${id}`)
+  }
+  else 
     return (
     <>
       {props.error && <div className="error"><FormattedMessage {...messages.err} /></div>}

@@ -1,7 +1,7 @@
 import produce from 'immer';
 import {
   GET_CURRENT_MOVIE, GET_CURRENT_MOVIE_ERROR, GET_CURRENT_MOVIE_SUCCESS,
-  EDIT_CURRENT_MOVIE, EDIT_CURRENT_MOVIE_ERROR, EDIT_CURRENT_MOVIE_SUCCESS
+  EDIT_CURRENT_MOVIE, EDIT_CURRENT_MOVIE_ERROR, EDIT_CURRENT_MOVIE_SUCCESS,
 } from './constants';
 export const initialState = {
   currentMovie: {
@@ -43,7 +43,8 @@ const editCurrentMoviePageReducer = (state = initialState, action) =>
       case EDIT_CURRENT_MOVIE_SUCCESS:
         draft.currentMovie = action.currentMovie;
         window.open("/moviesList", "_self");
-        break
+        break;
+
 
       default:
         break;

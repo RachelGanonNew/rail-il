@@ -4,7 +4,8 @@ import {
   GET_CURRENT_MOVIE_ERROR,
   EDIT_CURRENT_MOVIE,
   EDIT_CURRENT_MOVIE_SUCCESS,
-  EDIT_CURRENT_MOVIE_ERROR
+  EDIT_CURRENT_MOVIE_ERROR,
+
     
 } from './constants';
   
@@ -53,3 +54,4 @@ export function editCurrentMovieError(error){
   };
 };
   
+
